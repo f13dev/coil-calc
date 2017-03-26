@@ -120,6 +120,8 @@ then
 elif [ -n "$R" ] && [ -n "$P" ] ;
 then
 	echo "Calculating from Ohms (R) and Watts (P)" ;
+	V=$(bc -l <<< "scale=2;sqrt($P*$R)") ;
+	I=$(bc -l <<< "scale=2;sqrt($P/$R)") ;
 	
 elif [ -n "$R" ] && [ -n "$I" ] ;
 then
