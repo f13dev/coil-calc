@@ -1,1 +1,20 @@
 #!/bin/bash
+
+CSV="coils.csv"
+
+echo "Select a wire by entering it's corresponding number"
+echo ""
+
+# List wire types from CSV
+while read p; do
+    IFS=, arr=($p)
+    echo "${arr[0]}) ${arr[1]} -${arr[2]}"
+done <coils.csv
+
+echo "Enter wire number?"
+read -r WIRE
+
+# Get the selected wire 
+IFS=, wire=($(sed -n ${WIRE}p coils.csv))
+
+echo "${wire[1]}"
