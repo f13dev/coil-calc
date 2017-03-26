@@ -12,7 +12,9 @@ Simply run './ohms law', you will be asked to enter the values you already know 
 If you do not know a specific value, press [Return] to skip it.
 
 After you have completed the requested data:
+
 *If you have entered 2 or more values you will be presented with the data.
+
 *If you have only entered 1 data, or the values are not integers or floats (numbers or decimal numbers) the program will exit.
 
 ## With arguments 
@@ -25,6 +27,7 @@ Ohms Law can accept the following arguments:
 In order for the calculations to work 2 arguments must be supplied, both of which must be integegers or floats (numbers or decimal numbers).
 
 *If 2 or more valid arguments have been supplied you will be presented with the data.
+
 *If only 1 argument is provided or the arguments are not integers or floats (numbers or decimal numbers) the program will exit.
 
 ### Examples
