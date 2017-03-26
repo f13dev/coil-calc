@@ -9,13 +9,13 @@ echo ""
 while read p; do
     IFS=, arr=($p)
     echo "${arr[0]}) ${arr[1]} (${arr[2]})"
-done <coils.csv
+done <$CSV
 
 echo "Enter wire number?"
 read -r WIRE
 
 # Get the selected wire 
-IFS=, wire=($(sed -n ${WIRE}p coils.csv))
+IFS=, wire=($(sed -n ${WIRE}p $CSV))
 
 echo ""
 echo "You have selected: ${wire[1]} (${wire[2]}) @ ${wire[3]} Ohms per inch"
