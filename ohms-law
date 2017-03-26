@@ -102,6 +102,8 @@ validateNumber $I
 if [ -n "$V" ] && [ -n "$R" ] ;
 then 
 	echo "Calculating from Volts (V) and Ohms (R)" ;
+	P=$(bc -l <<< "scale=2;($V*$V/$R)") ;
+	I=$(bc -l <<< "scale=2;($V/$R)") ;
 
 elif [ -n "$V" ] && [ -n "$P" ] ;
 then
@@ -126,3 +128,9 @@ then
 else 
 	echo "There is not enough data to work out the missing values, at least 2 values are required!"
 fi
+
+# For testing only
+echo "Volts (V)  = ${V}"
+echo "Ohms (R)   = ${R}"
+echo "Watts (P)  = ${P}"
+echo "Amps (I)   = ${I}"
