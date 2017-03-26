@@ -76,3 +76,24 @@ echo "Watts (P)  = ${P}"
 echo "Amps (I)   = ${I}"
 
 # Check if values are numeric 
+# This function will exit if the input does not follow the rules
+# null
+# numeric 
+# numeric . numeric
+validateNumber ()
+{
+	if [ -n "$1" ]
+	then
+		if ! [[ "$1" =~ ^[0-9]+$ ]] && ! [[ "$1" =~ ^[-+]?[0-9]+\.?[0-9]*$ ]] ; 
+		then
+			echo "Error: '$1' is not a number"
+			exit
+		fi
+	fi
+}
+
+# Check the input data 
+validateNumber $V
+validateNumber $R
+validateNumber $P
+validateNumber $I
