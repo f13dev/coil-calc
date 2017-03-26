@@ -35,12 +35,6 @@ case $i in
 esac
 done
 
-# For testing only
-echo "Volts (V)  = ${V}"
-echo "Ohms (R)   = ${R}"
-echo "Watts (P)  = ${P}"
-echo "Amps (I)   = ${I}"
-
 # Check if any variables have been entered
 if [ -z "$V" ] && [ -z "$R" ] && [ -z "$P" ] && [ -z "$I" ];
 then
@@ -68,12 +62,6 @@ then
 	read -r I
 	
 fi
-
-# For testing only
-echo "Volts (V)  = ${V}"
-echo "Ohms (R)   = ${R}"
-echo "Watts (P)  = ${P}"
-echo "Amps (I)   = ${I}"
 
 # Check if values are numeric 
 # This function will exit if the input does not follow the rules
@@ -137,6 +125,7 @@ then
 	
 else 
 	echo "There is not enough data to work out the missing values, at least 2 values are required!"
+	exit
 fi
 
 # For testing only
@@ -144,3 +133,5 @@ echo "Volts (V)  = ${V}"
 echo "Ohms (R)   = ${R}"
 echo "Watts (P)  = ${P}"
 echo "Amps (I)   = ${I}"
+
+echo ""
