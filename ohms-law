@@ -132,6 +132,8 @@ then
 elif [ -n "$P" ] && [ -n "$I" ] ;
 then
 	echo "Calculating from Watts (P) and Amps (I)" ;
+	V=$(bc -l <<< "scale=2;($P/$I)") ;
+	R=$(bc -l <<< "scale=2;($P/($I*$I))") ;
 	
 else 
 	echo "There is not enough data to work out the missing values, at least 2 values are required!"
