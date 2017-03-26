@@ -40,8 +40,7 @@ if [ -z "$V" ] && [ -z "$R" ] && [ -z "$P" ] && [ -z "$I" ];
 then
 	echo "No values have been passed to the script."
 	echo ""
-	echo "You will be requested to enter the values you know, if you do not know a specific value then just press [Return] without entering a value.
-	You must enter exactly 2 values."
+	echo "You will be requested to enter the values you know, if you do not know a specific value then just press [Return] without entering a value."
 	echo ""
 	echo ""
 	
