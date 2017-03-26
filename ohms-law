@@ -97,3 +97,32 @@ validateNumber $V
 validateNumber $R
 validateNumber $P
 validateNumber $I
+
+# Do the calculations
+if [ -n "$V" ] && [ -n "$R" ] ;
+then 
+	echo "Calculating from Volts (V) and Ohms (R)" ;
+
+elif [ -n "$V" ] && [ -n "$P" ] ;
+then
+	echo "Calculating from Volts (V) and Watts (P)" ;
+	
+elif [ -n "$V" ] && [ -n "$I" ] ;
+then
+	echo "Calculating from Volts (V) and Amps (I)" ;
+
+elif [ -n "$R" ] && [ -n "$P" ] ;
+then
+	echo "Calculating from Ohms (R) and Watts (P)" ;
+	
+elif [ -n "$R" ] && [ -n "$I" ] ;
+then
+	echo "Calculating from Ohms (R) and Amps (I)" ;
+	
+elif [ -n "$P" ] && [ -n "$I" ] ;
+then
+	echo "Calculating from Watts (P) and Amps (I)" ;
+	
+else 
+	echo "There is not enough data to work out the missing values, at least 2 values are required!"
+fi
