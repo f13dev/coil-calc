@@ -8,7 +8,7 @@ echo ""
 # List wire types from CSV
 while read p; do
     IFS=, arr=($p)
-    echo "${arr[0]}) ${arr[1]} -${arr[2]}"
+    echo "${arr[0]}) ${arr[1]} (${arr[2]})"
 done <coils.csv
 
 echo "Enter wire number?"
@@ -17,4 +17,9 @@ read -r WIRE
 # Get the selected wire 
 IFS=, wire=($(sed -n ${WIRE}p coils.csv))
 
-echo "${wire[1]}"
+echo ""
+echo "You have selected: ${wire[1]} (${wire[2]}) @ ${wire[3]} Ohms per inch"
+
+echo ""
+echo "What is the diameter of your coil in mm"
+read -r DIAMETER
