@@ -126,6 +126,8 @@ then
 elif [ -n "$R" ] && [ -n "$I" ] ;
 then
 	echo "Calculating from Ohms (R) and Amps (I)" ;
+	V=$(bc -l <<< "scale=2;($I*$R)") ;
+	P=$(bc -l <<< "scale=2;($I*$I*$R)") ;
 	
 elif [ -n "$P" ] && [ -n "$I" ] ;
 then
