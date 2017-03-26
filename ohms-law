@@ -35,7 +35,44 @@ case $i in
 esac
 done
 
+# For testing only
 echo "Volts (V)  = ${V}"
 echo "Ohms (R)   = ${R}"
 echo "Watts (P)  = ${P}"
 echo "Amps (I)   = ${I}"
+
+# Check if any variables have been entered
+if [ -z "$V" ] && [ -z "$R" ] && [ -z "$P" ] && [ -z "$I" ];
+then
+	echo "No values have been passed to the script."
+	echo ""
+	echo "You will be requested to enter the values you know, if you do not know a specific value then just press [Return] without entering a value.
+	You must enter exactly 2 values."
+	echo ""
+	echo ""
+	
+	echo "Enter a value for Volts (V):"
+	
+	read -r V
+	
+	echo "Enter a value for Ohms (R):"
+	
+	read -r R
+	
+	echo "Enter a value for Watts (P):"
+	
+	read -r P
+	
+	echo "Enter a value for Amps (I):"
+	
+	read -r I
+	
+fi
+
+# For testing only
+echo "Volts (V)  = ${V}"
+echo "Ohms (R)   = ${R}"
+echo "Watts (P)  = ${P}"
+echo "Amps (I)   = ${I}"
+
+# Check if values are numeric 
