@@ -1,1 +1,41 @@
 #!/bin/bash
+
+# deal with variable inputs
+
+for i in "$@"
+do
+case $i in
+	# Get value for volts (V)
+	-v=*|--volts=*)
+	V="${i#*=}"
+	shift
+	;;
+
+	# Get value for ohms (R)
+	-r=*|--ohms=*)
+	R="${i#*=}"
+	shift
+	;;
+
+	# Get value for watts (P)
+	-p=*|--watts=*)
+	P="${i#*=}"
+	shift
+	;;
+
+	# GET value for amps (I)
+	-i=*|--amps=*)
+	I="${i#*=}"
+	shift
+	;;
+
+	# unrecognised
+	*)
+	;;
+esac
+done
+
+echo "Volts (V)  = ${V}"
+echo "Ohms (R)   = ${R}"
+echo "Watts (P)  = ${P}"
+echo "Amps (I)   = ${I}"
