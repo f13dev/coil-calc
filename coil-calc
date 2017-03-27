@@ -1,7 +1,41 @@
 #!/bin/bash
 
+# Constants
 CSV="coils.csv"
 PI=3.1415926535
+
+for i in "$@"
+do
+case $i in
+	# Get value for volts (V)
+	-w=*|--wire=*)
+	WIRENO="${i#*=}"
+	shift
+	;;
+
+	# Get value for ohms (R)
+	-r=*|--resistance=*)
+	RESISTANCE="${i#*=}"
+	shift
+	;;
+
+	# Get value for watts (P)
+	-d=*|--diameter=*)
+	DIAMETER="${i#*=}"
+	shift
+	;;
+
+	# GET value for amps (I)
+	-l=*|--lead=*)
+	LEAD="${i#*=}"
+	shift
+	;;
+
+	# unrecognised
+	*)
+	;;
+esac
+done
 
 # Check if values are numeric 
 # This function will exit if the input does not follow the rules
@@ -22,68 +56,102 @@ validateNumber ()
 	fi
 }
 
-echo "Select a wire by entering it's corresponding number"
-echo ""
-
-# List wire types from CSV
-LINE=0
-while read p; do
-    LINE=$(( $LINE + 1 ))
-    IFS=, arr=($p)
-    echo "${LINE}) ${arr[0]} (${arr[1]}AWG)"
-done <$CSV
-
-echo "Enter wire number?"
-read -r WIRENO
-
-# Get the selected wire 
-IFS=, WIRE=($(sed -n ${WIRENO}p $CSV))
-
-# Confirm the selected wire
-echo ""
-echo "You have selected: ${WIRE[0]} (${WIRE[1]}AWG) @ ${WIRE[2]} Ohms per inch"
-
-# Get the coil jig diameter
-echo ""
-echo "What is the diameter of your coil jig in mm (Default 3mm)?"
-read -r DIAMETER
-
-# Check the input 
-validateNumber $DIAMETER
-if [[ $? -eq 0 ]];
-then 
-	DIAMETER=3
-	echo "setting the coil jig diameter to the default of 3 mm"
-fi
-echo "The coil jig diameter is $DIAMETER mm"
-
-# Get the coil lead length
-echo ""
-echo "What is the lead length between the coil and atomiser in mm (Default: 5mm)?"
-read -r LEAD
-
-# Check the input
-validateNumber $LEAD
-if [[ $? -eq 0 ]];
-then 
-	LEAD=5
-	echo "setting the lead length to the defult of 5 mm"
-fi
-echo "The lead length is $LEAD mm"
-
-# Get the desired resistance
-echo ""
-echo "What is the desired resistance of each coil (Default 1 ohm)?"
-read -r RESISTANCE
-
-# Check the input 
-validateNumber $RESISTANCE
-if [[ $? -eq 0 ]];
+# Check if a wire number has been passed to the script
+if [ -z "$WIRENO" ];
 then
-	RESISTANCE=1
-	echo "setting the resistance to the default of 1 ohm"
+
+	echo "Select a wire by entering it's corresponding number"
+	echo ""
+
+	# List wire types from CSV
+	LINE=0
+	while read p; do
+		LINE=$(( $LINE + 1 ))
+		IFS=, arr=($p)
+		echo "${LINE}) ${arr[0]} (${arr[1]}AWG)"
+	done <$CSV
+
+	echo "Enter wire number?"
+	read -r WIRENO
+
+	# Get the selected wire 
+	IFS=, WIRE=($(sed -n ${WIRENO}p $CSV))
+
+	# Confirm the selected wire
+	echo ""
+	echo "You have selected: ${WIRE[0]} (${WIRE[1]}AWG) @ ${WIRE[2]} Ohms per inch"
+
+	# Get the coil jig diameter
+	echo ""
+	echo "What is the diameter of your coil jig in mm (Default 3mm)?"
+	read -r DIAMETER
+
+	# Check the input 
+	validateNumber $DIAMETER
+	if [[ $? -eq 0 ]];
+	then 
+		DIAMETER=3
+		echo "setting the coil jig diameter to the default of 3 mm"
+	fi
+	echo "The coil jig diameter is $DIAMETER mm"
+
+	# Get the coil lead length
+	echo ""
+	echo "What is the lead length between the coil and atomiser in mm (Default: 5mm)?"
+	read -r LEAD
+
+	# Check the input
+	validateNumber $LEAD
+	if [[ $? -eq 0 ]];
+	then 
+		LEAD=5
+		echo "setting the lead length to the defult of 5 mm"
+	fi
+	echo "The lead length is $LEAD mm"
+
+	# Get the desired resistance
+	echo ""
+	echo "What is the desired resistance of each coil (Default 1 ohm)?"
+	read -r RESISTANCE
+
+	# Check the input 
+	validateNumber $RESISTANCE
+	if [[ $? -eq 0 ]];
+	then
+		RESISTANCE=1
+		echo "setting the resistance to the default of 1 ohm"
+	fi
+	echo "The resistnace is $RESISTANCE ohm"
+else
+	# Get the selected wire 
+	IFS=, WIRE=($(sed -n ${WIRENO}p $CSV))
+	
+	# Check the other variables
+	
+	# Check the input 
+	validateNumber $DIAMETER
+	if [[ $? -eq 0 ]];
+	then 
+		DIAMETER=3
+		echo "setting the coil jig diameter to the default of 3 mm"
+	fi
+	
+	# Check the input
+	validateNumber $LEAD
+	if [[ $? -eq 0 ]];
+	then 
+		LEAD=5
+		echo "setting the lead length to the defult of 5 mm"
+	fi
+	
+	# Check the input 
+	validateNumber $RESISTANCE
+	if [[ $? -eq 0 ]];
+	then
+		RESISTANCE=1
+		echo "setting the resistance to the default of 1 ohm"
+	fi
 fi
-echo "The resistnace is $RESISTANCE ohm"
 
 # All inputs are gathered:
 #	WIRE[1] 	= 	AWG
