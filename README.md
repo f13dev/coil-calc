@@ -1,7 +1,7 @@
 # Coil Calc & Ohms Law
 A command line bash script for calculating ohms law and coil winding.
 
-# Requirements
+## Requirements
 * Bash - although this could easily be modified for a different shell
 * BC
 # Coil Calc
@@ -24,6 +24,19 @@ Coil Calc can accept the following arguments:
 * -r= (or --resistance=)
 
 The wire argument is required, missing other arguments will result in their default value being used.
+
+## Adding a custom wire
+Coil calc uses a CSV file to store details of different coil wire; this method allows the end user to add their favorite wire by editing a simple text file.
+
+What do I need to know?
+* A name for your wire, this must only consist of alphabetical letters without any spaces.
+* The AWG (American Wire Gauge) of the wire 
+* The resistance of the wire in ohms per inch
+
+Each data for the wire is to be sepearted by a comma; for example if the wire is 24AWG and has a resistance of 0.2 ohms per inch, the line to add would be:
+* WireName,24,0.2
+
+The details for each wire must be on their own line and the number that refers to each wire is the line number of which the wire resides in coils.csv.
 
 ## Examples 
 To calculate the number of turns for Kanthal A1 (24AWG) using the default values for the remaingin arguemnts:
