@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CSV="coils.csv"
+PI=3.1415926535
 
 # Check if values are numeric 
 # This function will exit if the input does not follow the rules
@@ -91,13 +92,43 @@ echo "The resistnace is $RESISTANCE ohm"
 #	LEAD 		= 	Coil lead length
 #	RESISTANCE 	= 	Desired resistance per coil
 
-# Total length of wire = resistance / resistance per inch (will change to resistance per meter eventually as imperial and metric combinations are just confusing!!)
-# Length of coil wire = total length - (LEAD * 2)
-# Length per turn = Pi * DIAMETER
-# Turns = Length of coil wire / length per turn ( will be a float, rather than the required int)
+# Work out the total length of the wire in mm
+LENGTH=$(bc -l <<< "scale=10;($RESISTANCE/(${WIRE[2]}/25.4))")
+
+# Work out the length of the coil part of the wire in mm
+COILLENGTH=$(bc -l <<< "scale=10;($LENGTH-($LEAD*2))")
+
+# Work out the circumfrence of each turn
+CIRCUMFRENCE=$(bc -l <<< "scale=10;($PI*$DIAMETER)")
+
+# Work out the number of turns required to get the requested resistance
+TURNS=$(bc -l <<< "scale=2;($COILLENGTH/$CIRCUMFRENCE)")
 
 # Round the number of coils to the nearest int 
+ROUNDEDTURNS=$(bc -l <<< "scale=0;($TURNS+0.5)/1")
 
-# Calculate finished resistance
-# Lenght of wire = Rounded number of turns * Length per turn + (LEAD * 2)
+# Work out the length of the rounded resistance wire 
+ROUNDEDLENGTH=$(bc -l <<< "scale=2;($ROUNDEDTURNS*$CIRCUMFRENCE+($LEAD*2))")
 
+# Work out the resistance of the rounded number of turns
+ROUNDEDOHMS=$(bc -l <<< "scale=2;($ROUNDEDLENGTH*(${WIRE[2]}/24.5))/1")
+
+# Clarify all of the input parameters
+echo ""
+echo "-- Requested coil perameters --"
+echo "Wire:		${WIRE[0]} (${WIRE[1]}AWG)"
+echo "Jig diameter:	$DIAMETER mm"
+echo "Resistance:	$RESISTANCE ohm"
+
+# Notify the user of the exact requested coil perameters
+echo ""
+echo "-- Exact results for $RESISTANCE ohm --"
+echo "Wire length:	$LENGTH mm"
+echo "Turns:		$TURNS"
+
+# Notify the user of the rounded coil perameters
+echo ""
+echo "-- Results of rounding to the nearest turn --"
+echo "Wire length:	$ROUNDEDLENGTH mm"
+echo "Turns:		$ROUNDEDTURNS"
+echo "Resistance:	$ROUNDEDOHMS ohm"
