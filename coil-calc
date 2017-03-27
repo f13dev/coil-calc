@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Change this line to represent the location of the script if you are linking it to /usr/local/bin
+cd /Users/jamesvalentine/dev/coil-calc
+
 # Constants
 CSV="coils.csv"
 PI=3.1415926535
