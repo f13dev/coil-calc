@@ -83,3 +83,21 @@ then
 	echo "setting the resistance to the default of 1 ohm"
 fi
 echo "The resistnace is $RESISTANCE ohm"
+
+# All inputs are gathered:
+#	WIRE[1] 	= 	AWG
+#	WIRE[2] 	= 	Ohms per inch
+#	DIAMETER 	= 	Jig diameter 
+#	LEAD 		= 	Coil lead length
+#	RESISTANCE 	= 	Desired resistance per coil
+
+# Total length of wire = resistance / resistance per inch (will change to resistance per meter eventually as imperial and metric combinations are just confusing!!)
+# Length of coil wire = total length - (LEAD * 2)
+# Length per turn = Pi * DIAMETER
+# Turns = Length of coil wire / length per turn ( will be a float, rather than the required int)
+
+# Round the number of coils to the nearest int 
+
+# Calculate finished resistance
+# Lenght of wire = Rounded number of turns * Length per turn + (LEAD * 2)
+
