@@ -4,6 +4,7 @@ A command line bash script for calculating ohms law and coil winding.
 ## Requirements
 * Bash - although this could easily be modified for a different shell
 * BC
+Bash is only accessible from computers running variants of Linux/BSD/MacOS X
 # Coil Calc
 ## Usage 
 ### Without arguments 
@@ -78,3 +79,14 @@ To calculate for 1.2 ohms at 3.2 volts:
 
 To calculate for 4.2 amps at 52 watts:
 ./ohms-law -i=4.2 -p=52
+
+# Installation (so to speak)
+Bash scripts do not as such require installing, they do on the other hand need to be marked as executable.
+
+Open a terminal and navigate to the location of the scripts and run:
+* chmod +x coil-calc
+*chmod +x ohms-law
+
+By default bash scripts can only be run from the directory they are located in, if you wish to make them executable from anywhere within the terminal you will need to link them to a /usr/local/bin. To do so run:
+* sudo ln -s /pathtoscript/coil-calc /usr/local/bin/coil-calc 
+* sudo ln -s /pathtoscript/ohms-law /usr/local/bin/ohms-law
