@@ -127,7 +127,7 @@ else
 	exit
 fi
 
-# For testing only
+# Output the results
 echo "Volts (V)  = ${V}"
 echo "Ohms (R)   = ${R}"
 echo "Watts (P)  = ${P}"

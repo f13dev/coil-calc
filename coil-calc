@@ -23,3 +23,4 @@ echo "You have selected: ${wire[1]} (${wire[2]}) @ ${wire[3]} Ohms per inch"
 echo ""
 echo "What is the diameter of your coil in mm"
 read -r DIAMETER
+
