@@ -81,12 +81,16 @@ To calculate for 4.2 amps at 52 watts:
 ./ohms-law -i=4.2 -p=52
 
 # Installation (so to speak)
+## Basic
 Bash scripts do not as such require installing, they do on the other hand need to be marked as executable.
 
 Open a terminal and navigate to the location of the scripts and run:
 * chmod +x coil-calc
-*chmod +x ohms-law
+* chmod +x ohms-law
 
+## Making it global
 By default bash scripts can only be run from the directory they are located in, if you wish to make them executable from anywhere within the terminal you will need to link them to a /usr/local/bin. To do so run:
 * sudo ln -s /pathtoscript/coil-calc /usr/local/bin/coil-calc 
 * sudo ln -s /pathtoscript/ohms-law /usr/local/bin/ohms-law
+
+As the coil calc script relies on a local CSV file to function you will need to modify the second line of code in coil-calc to represent the location of the script on your computer. 
