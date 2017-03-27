@@ -2,6 +2,24 @@
 
 CSV="coils.csv"
 
+# Check if values are numeric 
+# This function will exit if the input does not follow the rules
+# null
+# numeric 
+# numeric . numeric
+validateNumber ()
+{
+	if [ -n "$1" ]
+	then
+		if ! [[ "$1" =~ ^[0-9]+$ ]] && ! [[ "$1" =~ ^[-+]?[0-9]+\.?[0-9]*$ ]] ; 
+		then
+			echo -n "Error: '$1' is not a number"
+			return 0
+		fi
+	fi
+	return 1
+}
+
 echo "Select a wire by entering it's corresponding number"
 echo ""
 
@@ -19,10 +37,27 @@ read -r WIRENO
 # Get the selected wire 
 IFS=, WIRE=($(sed -n ${WIRENO}p $CSV))
 
+# Confirm the selected wire
 echo ""
 echo "You have selected: ${WIRE[0]} (${WIRE[1]}AWG) @ ${WIRE[2]} Ohms per inch"
 
+# Get the coil jig diameter
 echo ""
-echo "What is the diameter of your coil in mm"
+echo "What is the diameter of your coil jig in mm (Default 3mm)?"
 read -r DIAMETER
 
+# Check the input 
+validateNumber $DIAMETER
+if [[ $? -eq 1 ]];
+then 
+	echo "Number valid"
+else 
+	DIAMETER=3
+	echo ", setting the diameter to the default of 3"
+fi
+echo "The diameter is $DIAMETER"
+
+# Get the coil lead length
+echo ""
+echo "What is the lead length between the coil and atomiser in mm (Default: 5mm)?"
+read -r LEAD
