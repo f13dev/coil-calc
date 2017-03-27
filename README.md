@@ -25,6 +25,13 @@ Coil Calc can accept the following arguments:
 
 The wire argument is required, missing other arguments will result in their default value being used.
 
+#### Examples 
+To calculate the number of turns for Kanthal A1 (24AWG) using the default values for the remaingin arguemnts:
+./coil-calc -w=3
+
+To calculate the number of turns for Kanthal A1 (22AWG), with a coil jig of 2mm diameter, a lead length of 3.5mm and a resistance of 0.6ohm:
+./coil-calc -w=2 -d=2 -l=3.5 -r=0.6
+
 ## Adding a custom wire
 Coil calc uses a CSV file to store details of different coil wire; this method allows the end user to add their favorite wire by editing a simple text file.
 
@@ -37,13 +44,6 @@ Each data for the wire is to be sepearted by a comma; for example if the wire is
 * WireName,24,0.2
 
 The details for each wire must be on their own line and the number that refers to each wire is the line number of which the wire resides in coils.csv.
-
-## Examples 
-To calculate the number of turns for Kanthal A1 (24AWG) using the default values for the remaingin arguemnts:
-./coil-calc -w=3
-
-To calculate the number of turns for Kanthal A1 (22AWG), with a coil jig of 2mm diameter, a lead length of 3.5mm and a resistance of 0.6ohm:
-./coil-calc -w=2 -d=2 -l=3.5 -r=0.6
 
 # Ohms Law
 ## Usage 
