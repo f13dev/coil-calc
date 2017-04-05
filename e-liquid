@@ -1,1 +1,5 @@
 #!/bin/bash
+
+echo "Enter '1' to create a recipe or '2' to load a recipe."
+# Ask the user if they wish to add a recipe or load a recipe
+read -r mode
